@@ -1,0 +1,18 @@
+{
+  "name": "create-bugout-app",
+  "version": "0.0.1",
+  "description": "Create bugout application with single command",
+  "main": "tasks/cba.js",
+  "license": "ISC",
+  "scripts": {
+    "cba": "node tasks/cba.js",
+    "cma": "node tasks/cma.js"
+  },
+  "author": "@bugout",
+  "dependencies": {
+    "@bugout/bugout-js": "^0.0.16",
+    "argparse": "^2.0.1",
+    "fs": "^0.0.1-security",
+    "uuid": "^8.3.2"
+  }
+}
