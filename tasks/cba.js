@@ -7,6 +7,7 @@ const fs = require("fs");
 const CreateBugoutApplication = require("../src/CreateBugoutApplication").default;
 
 
+
 const main = async () => {
   const ArgumentParser = require("argparse").ArgumentParser;
 

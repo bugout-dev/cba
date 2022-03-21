@@ -58,7 +58,7 @@ class CreateBugoutApplication {
     return this.app;
   }
 
-  exportToEnviromentVariable(out) {
+  exportToEnviromentVariable(out, extraFields) {
     fs.writeFile(out, "", () => {});
     fs.appendFileSync(out, `export BUGOUT_APPLICATION_ID="${this.app.id}"\n`);
     fs.appendFileSync(out, `export BUGOUT_GROUP_ID="${this.groupId}"\n`, {});
@@ -77,11 +77,14 @@ class CreateBugoutApplication {
       `export APPLICATION_ADMIN_PASSWORD="${this.groupAdminPassword}"\n`,
       {}
     );
+    Object.keys(extraFields)?.map((key) => {
+      fs.appendFileSync(out, `export ${key}="${extraFields[key]}"\n`, {});
+    });
     console.log("done");
   }
 
-  exportToJSON(out) {
-    const outputData = {
+  exportToJSON(out, extraFields) {
+    let outputData = {
       applicationID: this.app.id,
       groupId: this.groupId,
       username: this.groupAdminUser.username,
@@ -89,13 +92,14 @@ class CreateBugoutApplication {
       password: this.groupAdminPassword,
       token: this.groupAdminToken.id,
     };
+    outputData = { ...outputData, ...extraFields };
     fs.writeFile(out, JSON.stringify(outputData), function (err) {
       if (err) throw err;
       console.log("Saved to output file!");
     });
   }
 
-  printOut() {
+  printOut(extraFields) {
     console.log("************************************");
     console.log("Application created:");
     console.log("Application ID:", this.app.id);
@@ -106,7 +110,10 @@ class CreateBugoutApplication {
     console.log("email", this.groupAdminUser.email);
     console.log("password:", this.groupAdminPassword);
     console.log("Generated admin token", this.groupAdminToken.id);
-    console.log("You must take care to save admin token!");
+    Object.keys(extraFields)?.map((key) => {
+      console.log(`Additional key ${key} -> "${extraFields[key]}"\n`);
+    });
+    console.log("Don't forget to save admin token!");
     console.log("************************************");
   }
 }

@@ -12,6 +12,7 @@
   "dependencies": {
     "@bugout/bugout-js": "^0.0.16",
     "argparse": "^2.0.1",
+    "axios": "^0.26.1",
     "fs": "^0.0.1-security",
     "uuid": "^8.3.2"
   }
